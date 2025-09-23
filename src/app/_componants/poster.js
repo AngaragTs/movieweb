@@ -1,5 +1,7 @@
+import { Starticon } from "../icons/Staricon";
+
 export const Poster = (props) => {
-  const { image, icon, title } = props;
+  const { image, title, rate } = props;
   return (
     <div>
       <div className="w-58 h-92 bg-[#F4F4F5]  ">
@@ -8,9 +10,9 @@ export const Poster = (props) => {
           src={image}
         ></img>
         <div className="ml-5 flex gap-2 mt-3">
-          {icon}
+          <Starticon />
           <p>
-            6.9/<span className="text-xs">10</span>
+            {rate}/<span className="text-xs">10</span>
           </p>
         </div>
         <div className="ml-5">

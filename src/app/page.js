@@ -4,6 +4,7 @@ import { Header } from "./_features/Header";
 import { Hero } from "./_features/Hero";
 import { MovieList } from "./_features/MovieList";
 import { Footer } from "./_features/Footer";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   return (

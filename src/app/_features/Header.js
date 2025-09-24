@@ -1,6 +1,7 @@
 import { Smallicon } from "../icons/smallicon";
 import { MovieZ } from "../icons/MoiveZ";
 import { DownIcon } from "../icons/DownIcon";
+import { GenrePopUp } from "./GenrePopUp";
 
 export const Header = () => {
   return (
@@ -14,6 +15,7 @@ export const Header = () => {
         <button className="w-24 h-9 border-1 border-[#E4E4E7] cursor-pointer rounded-xl items-center justify-evenly flex ">
           <DownIcon />
           <p className="w-10 h-6 font-[400]">Genre</p>
+          {/* <onclick="GenrePopUp"/> */}
         </button>
 
         <div className="flex-row flex h-9 w-94 border-1 border-[#E4E4E7] rounded-xl p-1 items-center">

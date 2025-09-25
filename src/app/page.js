@@ -2,18 +2,21 @@
 
 import { Header } from "./_features/Header";
 import { Hero } from "./_features/Hero";
-import { MovieList } from "./_features/MovieList";
+
 import { Footer } from "./_features/Footer";
 import { useEffect, useState } from "react";
+import { UpComingMovieList } from "./_features/UpComingMovieList";
+import { PopularMovieList } from "./_features/PopularMovieList";
+import { TopRatedMovieList } from "./_features/TopRatedMovieList";
 
 export default function Home() {
   return (
     <div className="w-[1440px] m-auto">
       <Header />
       <Hero />
-      <MovieList heading={"Upcoming"} />
-      <MovieList heading={"Popular"} />
-      <MovieList heading={"Top Rated"} />
+      <UpComingMovieList heading={"Upcoming"} />
+      <PopularMovieList heading={"Popular"} />
+      <TopRatedMovieList heading={"Top Rated"} />
       <Footer />
     </div>
   );

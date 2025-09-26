@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Poster } from "../_componants/poster";
 import { useState, useEffect } from "react";
+import { Loader } from "../_componants/loader";
 
 const apiLink =
   "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
@@ -26,7 +27,9 @@ export const UpComingMovieList = (props) => {
     const data = await fetch(apiLink, options);
     const jsonData = await data.json();
     setUpComingMoviesData(jsonData.results);
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 4000);
   };
 
   useEffect(() => {
@@ -34,7 +37,13 @@ export const UpComingMovieList = (props) => {
   }, []);
 
   if (Loading) {
-    return <div>...Loading</div>;
+    return (
+      <div className="w-[1440px] h-210 mt-10 flex  flex-wrap justify-center flex-col ">
+        <div className="w-full h-9 justify-between">
+          <Loader />
+        </div>
+      </div>
+    );
   }
   return (
     <div className="w-full h-210 mt-10 justify-center ">

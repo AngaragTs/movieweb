@@ -11,7 +11,7 @@ export const Header = () => {
   const [openGenre, setOpenGenre] = useState(false);
 
   return (
-    <div className="w-full h-20 flex-row  flex justify-evenly items-center  ">
+    <div className="w-full h-20 flex-row  flex justify-evenly items-center z-20 relative ">
       <div className="h-5 w-25 flex items-center gap-2">
         <Smallicon />
         <MovieZ />

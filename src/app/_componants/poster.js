@@ -1,4 +1,5 @@
 import { Starticon } from "../icons/Staricon";
+import Link from "next/link";
 
 export const Poster = (props) => {
   const { image, title, rate } = props;

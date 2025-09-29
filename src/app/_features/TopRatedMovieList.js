@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Poster } from "../_componants/poster";
 import { useState, useEffect } from "react";
+import { Loader } from "../_componants/loader";
 
 const apiLink =
   "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
@@ -25,7 +26,10 @@ export const TopRatedMovieList = (props) => {
     const data = await fetch(apiLink, options);
     const jsonData = await data.json();
     setTopRatedMoviesData(jsonData.results);
-    setLoading(false);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   };
 
   useEffect(() => {
@@ -33,13 +37,17 @@ export const TopRatedMovieList = (props) => {
   }, []);
 
   if (Loading) {
-    return <div>...Loading</div>;
+    return (
+      <div className="w-[1440px] h-210  flex  flex-wrap justify-around gap-5">
+        <Loader />
+      </div>
+    );
   }
 
   return (
     <div className="w-full h-210 mt-10 justify-center ">
-      <div className="w-full h-9 flex-row flex justify-between  ">
-        <p className="font-semibold">{heading}</p>
+      <div className="w-full h-9 flex-row flex justify-evenly items-center ">
+        <p className="w-320 font-semibold">{heading}</p>
         <Link href={"/TopRated"}>
           <button className="cursor-pointer">See more</button>
         </Link>

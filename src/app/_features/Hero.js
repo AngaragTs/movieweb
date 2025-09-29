@@ -3,8 +3,9 @@
 import { Sideicon } from "../icons/Sideicon";
 import { OppositeSideIcon } from "../icons/OppositeSideIcon";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Starticon } from "../icons/Staricon";
+import { HeroLoader } from "../_componants/heroloader";
 
 const apiLink =
   "https://api.themoviedb.org/3//movie/now_playing?language=en-US&page=1";
@@ -53,11 +54,34 @@ export const Hero = () => {
   };
 
   const currentSlide = slides[currentIndex];
+  const [Loading, setLoading] = useState(false);
+
+  const getData = async () => {
+    setLoading(true);
+    const data = await fetch(apiLink, options);
+    const jsonData = await data.json();
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  if (Loading) {
+    return (
+      <div className="w-[1440px] h-210  flex  flex-wrap justify-around gap-5">
+        <HeroLoader />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-[800px] relative overflow-hidden flex justify-center  items-center">
       <div
-        className="flex transition-transform duration-500 "
+        className="flex transition-transform~ duration-500 "
         style={{
           transform: `translateX(-${currentIndex * 100}%)`,
           width: `${slides.length * 100}%`,

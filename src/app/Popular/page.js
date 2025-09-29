@@ -34,23 +34,26 @@ export default function Home() {
     return <div>...Loading</div>;
   }
   return (
-    <div className="w-[1440px] h-210 mt-10 justify-center ">
+    <div className="w-full h-210 mt-10 justify-center ">
       <Header />
-      <div className="w-full h-9 flex-row ml-10 ">
-        <p className="font-semibold"> Upcoming</p>
-      </div>
-
-      <div className="w-full  flex-wrap justify-around flex gap-5 p-5 ">
-        {UpComingMoviesdata.map((movie, index) => {
-          return (
-            <Poster
-              key={index}
-              title={movie.title}
-              rate={movie.vote_average}
-              image={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-            />
-          );
-        })}
+      <div className="w-full flex items-center justify-center">
+        <div className="w-[1440px]">
+          <div className="w-full h-9 flex-row ml-10 ">
+            <p className="font-semibold"> Popular</p>
+          </div>
+          <div className="w-full  flex-wrap justify-around flex gap-5 p-5 ">
+            {UpComingMoviesdata.map((movie, index) => {
+              return (
+                <Poster
+                  key={index}
+                  title={movie.title}
+                  rate={movie.vote_average}
+                  image={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
       <Footer />
     </div>

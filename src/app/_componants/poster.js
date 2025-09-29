@@ -1,11 +1,20 @@
 import { Starticon } from "../icons/Staricon";
 import Link from "next/link";
+import {useRouter } from "next/router";
 
 export const Poster = (props) => {
-  const { image, title, rate } = props;
+  const { image, title, rate, movieId } = props;
+  
+  const router = useRouter
+
+  const HandleMovieClick = () => {
+    router.push('movie-detail/${movieId}')
+  }
   return (
     <div>
-      <div className="w-58 h-92 bg-[#F4F4F5] rounded-2xl ">
+    
+      <div className="w-58 h-92 bg-[#F4F4F5] rounded-2xl cursor-pointer "
+      onClick={HandleMovieClick}>
         <img
           className="w-58 h-70  hover:opacity-20 cursor-pointer rounded-2xl"
           src={image}

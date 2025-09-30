@@ -52,6 +52,7 @@ export default function Home() {
                   key={index}
                   title={movie.title}
                   rate={movie.vote_average}
+                  movieId={movie.id}
                   image={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
                 />
               );

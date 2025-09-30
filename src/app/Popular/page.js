@@ -47,6 +47,7 @@ export default function Home() {
                 <Poster
                   key={index}
                   title={movie.title}
+                  movieId={movie.id}
                   rate={movie.vote_average}
                   image={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
                 />

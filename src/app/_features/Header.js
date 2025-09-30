@@ -30,7 +30,7 @@ export const Header = () => {
           </div>
 
           <div className="flex-row flex h-9 w-94 border-1 border-[#E4E4E7] rounded-xl p-1 items-center">
-            <img className="w-4 h-4 " src="./images/SearchIcon.jpg"></img>
+            <img className="w-4 h-4 " src="../images/SearchIcon.jpg"></img>
 
             <input
               placeholder="Search..."
@@ -42,7 +42,7 @@ export const Header = () => {
       </div>
 
       <button className="cursor-pointer">
-        <img src="./images/icon2.jpg"></img>
+        <img src="../images/icon2.jpg"></img>
       </button>
     </div>
   );

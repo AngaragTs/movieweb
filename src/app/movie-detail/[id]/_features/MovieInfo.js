@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Loader } from "@/app/_componants/loader";
 import { HeroLoader } from "@/app/_componants/heroloader";
+import { Poster } from "@/app/_componants/poster";
 const options = {
   method: "GET",
   headers: {
@@ -17,6 +18,8 @@ const options = {
 export const MovieInfo = ({ id }) => {
   const [Moviesdata, setMoviesData] = useState([]);
   const [Moviesdatas, setMoviesDatas] = useState();
+  const [MovieStardata, setMoviesActorData] = useState();
+  const [MoreMovies, setMoreMoviesDatas] = useState();
   const [Loading, setLoading] = useState(false);
   const getData = async () => {
     setLoading(true);
@@ -35,20 +38,51 @@ export const MovieInfo = ({ id }) => {
   const GetActorData = async () => {
     setLoading(true);
     const data = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
+      `https://api.themoviedb.org/3//movie/${id}/credits?language=en-US`,
       options
     );
     const jsonData = await data.json();
     setMoviesDatas(jsonData);
-    console.log(jsonData);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  };
+  const GetStarsData = async () => {
+    setLoading(true);
+    const data = await fetch(
+      `https://api.themoviedb.org/3//movie/${id}/credits?language=en-US`,
+      options
+    );
+    const jsonData = await data.json();
+    setMoviesActorData(jsonData);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  };
+
+  const setMoreMovies = async () => {
+    setLoading(true);
+    const data = await fetch(
+      `https://api.themoviedb.org/3//movie/${id}/similar?language=en-US&page=1`,
+      options
+    );
+    const jsonData = await data.json();
+    setMoreMoviesDatas(jsonData);
 
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   };
   useEffect(() => {
+    GetStarsData();
+  }, []);
+
+  useEffect(() => {
     getData();
   }, []);
+
   useEffect(() => {
     GetActorData();
   }, []);
@@ -59,11 +93,11 @@ export const MovieInfo = ({ id }) => {
       </div>
     );
   }
-
+  console.log(Moviesdatas);
   return (
     <>
       {Moviesdata && (
-        <div>
+        <div className="h-200">
           <div className="w-[1440px] h-140 m-auto">
             <div>
               <div className="flex justify-between">
@@ -86,46 +120,55 @@ export const MovieInfo = ({ id }) => {
             <div className="flex gap-10 w-[1440px]">
               <img
                 src={`https://image.tmdb.org/t/p/original/${Moviesdata.poster_path}`}
-                className="w-20% h-[428px]"
+                className="w-100 h-[428px]"
               ></img>{" "}
               <img
                 src={`https://image.tmdb.org/t/p/original/${Moviesdata.backdrop_path}`}
-                className="w-70% h-[428px] flex"
+                className="w-300 h-[428px] flex"
               ></img>
             </div>
           </div>
           <div className="h-100 w-[1440px] m-auto mt-10">
             <div className="w-120 flex flex-wrap gap-2 ">
-              {/* // <Genres button={"Action"} />
-              // <Genres button={"Action"} />
-              // <Genres button={"Action"} />
-              // <Genres button={"Action"} />
-              // <Genres button={"Action"} /> */}
+              <Genres button={"Action"} />
+              <Genres button={"Action"} />
+              <Genres button={"Action"} />
+              <Genres button={"Action"} />
+              <Genres button={"Action"} />
             </div>
             <p>{Moviesdata.overview}</p>
           </div>
         </div>
       )}
       {Moviesdatas && (
-        <div>
-          <div className=" h-7 w-270 flex">
+        <div className="w-360 h-70 m-auto ">
+          <div className=" h-7 w-280 flex gap-10">
             <p className="font-bold">Director</p>
-          </div>
-          <div className="w-full h-0.2 border-1 border-[#E4E4E7]"></div>
-          <div className=" h-7 w-270 flex">
-            <p className="font-bold">Writers</p>
-            {Moviesdatas.crew.slice(0, 2).map((item, index) => {
+            {MovieStardata.crew.slice(5, 7).map((item, index) => {
               return <span key={index}>{item.name}</span>;
             })}
           </div>
           <div className="w-full h-0.2 border-1 border-[#E4E4E7]"></div>
-          <div className=" h-7 w-270 flex">
+          <div className=" h-7 w-280 flex gap-10">
+            <p className="font-bold">Writers</p>
+
+            {Moviesdatas.crew.slice(0, 5).map((item, index) => {
+              return <span key={index}>{item.name}</span>;
+            })}
+          </div>
+          <div className="w-full h-0.2 border-1 border-[#E4E4E7]"></div>
+          <div className=" h-7 w-280 flex gap-10">
             <p className="font-bold">Stars</p>
-            <p>Cynthia Erivo · Ariana Grande · Jeff Goldblum</p>
+            {Moviesdatas.cast.slice(0, 5).map((item, index) => {
+              return <span key={index}>{item.name}</span>;
+            })}
           </div>
           <div className="w-full h-0.2 border-1 border-[#E4E4E7]"></div>
         </div>
       )}
+      <div className="w-[1440px] h-100 m-auto">
+        <Poster />
+      </div>
     </>
   );
 };

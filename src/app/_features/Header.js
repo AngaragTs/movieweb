@@ -10,6 +10,16 @@ import { PopUpFeauture } from "./PopUpFeature";
 export const Header = () => {
   const [openGenre, setOpenGenre] = useState(false);
 
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzZiMzEwNzJlZDg5ODcwMzQxM2Y0NzkyYzZjZTdjYyIsIm5iZiI6MTczODAyNjY5NS44NCwic3ViIjoiNjc5ODJlYzc3MDJmNDkyZjQ3OGY2OGUwIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.k4OF9yGrhA2gZ4VKCH7KLnNBB2LIf1Quo9c3lGF6toE",
+    },
+  };
+  const apiLink =
+    "https://api.themoviedb.org/3/search/movie?query=${searchValue}&language=en-US&page=${page}";
   return (
     <div className="w-full h-20 flex-row  flex justify-evenly items-center z-20 relative ">
       <div className="h-5 w-25 flex items-center gap-2">

@@ -9,7 +9,7 @@ import { PopUpFeauture } from "./PopUpFeature";
 
 export const Header = () => {
   const [openGenre, setOpenGenre] = useState(false);
-
+  4;
   const options = {
     method: "GET",
     headers: {

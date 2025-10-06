@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Loader } from "@/app/_componants/loader";
 import { HeroLoader } from "@/app/_componants/heroloader";
 import { Poster } from "@/app/_componants/poster";
+import { Trailer } from "@/app/_features/trailer";
 const options = {
   method: "GET",
   headers: {
@@ -21,6 +22,7 @@ export const MovieInfo = ({ id }) => {
   const [MovieStardata, setMoviesActorData] = useState();
   const [MoreMovies, setMoreMoviesDatas] = useState();
   const [Loading, setLoading] = useState(false);
+  const [trailer, setTrailer] = useState(false);
   const getData = async () => {
     setLoading(true);
     const data = await fetch(
@@ -29,11 +31,11 @@ export const MovieInfo = ({ id }) => {
     );
     const jsonData = await data.json();
     setMoviesData(jsonData);
-    console.log(jsonData);
+    console.log("moviedata", jsonData);
 
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 100);
   };
   const GetActorData = async () => {
     setLoading(true);
@@ -46,7 +48,7 @@ export const MovieInfo = ({ id }) => {
 
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 100);
   };
   const GetStarsData = async () => {
     setLoading(true);
@@ -59,7 +61,7 @@ export const MovieInfo = ({ id }) => {
 
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 100);
   };
 
   const setMoreMovies = async () => {
@@ -69,12 +71,33 @@ export const MovieInfo = ({ id }) => {
       options
     );
     const jsonData = await data.json();
-    setMoreMoviesDatas(jsonData);
+    setMoreMoviesDatas(jsonData.results);
+    console.log("this is more", jsonData.results);
 
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 100);
   };
+
+  // const MovieTrailer = async () => {
+  //   setLoading(true);
+  //   const data = await fetch(
+  //     `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
+  //     options
+  //   );
+  //   const jsonData = await data.json();
+  //   setTrailer(jsonData.results);
+  //   console.log("this is more", jsonData.results);
+
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 100);
+  // };
+
+  // useEffect(() => {
+  //   MovieTrailer();
+  // }, []);
+
   useEffect(() => {
     GetStarsData();
   }, []);
@@ -86,6 +109,11 @@ export const MovieInfo = ({ id }) => {
   useEffect(() => {
     GetActorData();
   }, []);
+
+  useEffect(() => {
+    setMoreMovies();
+  }, []);
+
   if (Loading) {
     return (
       <div className="w-[1440px] h-210 m-auto justify-center items-center">
@@ -117,25 +145,39 @@ export const MovieInfo = ({ id }) => {
                 </div>
               </div>
             </div>
-            <div className="flex gap-10 w-[1440px]">
+            <div className="flex gap-10 w-[1440px] justify- items-end">
               <img
                 src={`https://image.tmdb.org/t/p/original/${Moviesdata.poster_path}`}
                 className="w-100 h-[428px]"
-              ></img>{" "}
+              ></img>
               <img
                 src={`https://image.tmdb.org/t/p/original/${Moviesdata.backdrop_path}`}
-                className="w-300 h-[428px] flex"
+                className="w-300 h-[428px] flex  "
               ></img>
+              <div className="w-[1000px]  absolute flex justify-center items-center mb-10">
+                <button
+                  className="h-10 w-36 bg-emerald-100 cursor-pointer rounded-xl"
+                  onClick={() => {
+                    setTrailer(!trailer);
+                  }}
+                >
+                  <p className="text-black">Watch Trailer</p>
+                </button>
+              </div>
+              <div className="w-full absolute">
+                {trailer && <Trailer id={id} />}
+              </div>
             </div>
           </div>
+          <div className="w-full  flex flex-row justify-center gap-5">
+            {Moviesdata?.genres?.map((genres, index) => {
+              return <Genres button={genres.name} key={index} />;
+            })}
+          </div>
+
           <div className="h-100 w-[1440px] m-auto mt-10">
-            <div className="w-120 flex flex-wrap gap-2 ">
-              <Genres button={"Action"} />
-              <Genres button={"Action"} />
-              <Genres button={"Action"} />
-              <Genres button={"Action"} />
-              <Genres button={"Action"} />
-            </div>
+            <div className="w-120 flex flex-wrap gap-2 "></div>
+
             <p>{Moviesdata.overview}</p>
           </div>
         </div>
@@ -166,8 +208,26 @@ export const MovieInfo = ({ id }) => {
           <div className="w-full h-0.2 border-1 border-[#E4E4E7]"></div>
         </div>
       )}
-      <div className="w-[1440px] h-100 m-auto">
-        <Poster />
+      <div className="w-[1440px] h-100 m-auto flex flex-col mb-10">
+        <div className="w-[1440px] flex justify-around">
+          <p className="text-2xl font-semibold">More like this</p>
+          <button className="font-medium text-sm cursor-pointer">
+            See more
+          </button>
+        </div>
+        <div className="w-full flex justify-evenly items-center gap-18">
+          {MoreMovies?.slice(0, 5).map((movie, index) => {
+            return (
+              <Poster
+                key={index}
+                title={movie.title}
+                rate={movie.vote_average}
+                movieId={movie.id}
+                image={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );

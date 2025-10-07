@@ -7,6 +7,7 @@ import { Loader } from "@/app/_componants/loader";
 import { HeroLoader } from "@/app/_componants/heroloader";
 import { Poster } from "@/app/_componants/poster";
 import { Trailer } from "@/app/_features/trailer";
+import Link from "next/link";
 const options = {
   method: "GET",
   headers: {
@@ -186,7 +187,7 @@ export const MovieInfo = ({ id }) => {
         <div className="w-360 h-70 m-auto ">
           <div className=" h-7 w-280 flex gap-10">
             <p className="font-bold">Director</p>
-            {MovieStardata.crew.slice(5, 7).map((item, index) => {
+            {MovieStardata.crew?.slice(5, 7).map((item, index) => {
               return <span key={index}>{item.name}</span>;
             })}
           </div>
@@ -194,14 +195,14 @@ export const MovieInfo = ({ id }) => {
           <div className=" h-7 w-280 flex gap-10">
             <p className="font-bold">Writers</p>
 
-            {Moviesdatas.crew.slice(0, 5).map((item, index) => {
+            {Moviesdatas.crew?.slice(0, 5).map((item, index) => {
               return <span key={index}>{item.name}</span>;
             })}
           </div>
           <div className="w-full h-0.2 border-1 border-[#E4E4E7]"></div>
           <div className=" h-7 w-280 flex gap-10">
             <p className="font-bold">Stars</p>
-            {Moviesdatas.cast.slice(0, 5).map((item, index) => {
+            {Moviesdatas.cast?.slice(0, 5).map((item, index) => {
               return <span key={index}>{item.name}</span>;
             })}
           </div>
@@ -211,9 +212,11 @@ export const MovieInfo = ({ id }) => {
       <div className="w-[1440px] h-100 m-auto flex flex-col mb-10">
         <div className="w-[1440px] flex justify-around">
           <p className="text-2xl font-semibold">More like this</p>
-          <button className="font-medium text-sm cursor-pointer">
-            See more
-          </button>
+          <Link href={`/morelike/?id=${id}`}>
+            <button className="font-medium text-sm cursor-pointer">
+              See more
+            </button>
+          </Link>
         </div>
         <div className="w-full flex justify-evenly items-center gap-18">
           {MoreMovies?.slice(0, 5).map((movie, index) => {

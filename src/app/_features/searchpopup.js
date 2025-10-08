@@ -3,8 +3,14 @@
 import Link from "next/link";
 import { Sideicon } from "../icons/Sideicon";
 import { Starticon } from "../icons/Staricon";
+import { useRouter } from "next/navigation";
 export const SearchPopUp = (props) => {
-  const { moviesdatas } = props;
+  const { moviesdatas, values } = props;
+  const router = useRouter();
+  const HandleResultClick = () => {
+    router.push(`/searchvalue/${values}`);
+  };
+
   return (
     <>
       {" "}
@@ -54,7 +60,9 @@ export const SearchPopUp = (props) => {
           );
         })}
         <div className="h-10 w-50">
-          <button className="cursor-pointer">See all result for ""</button>
+          <button onClick={HandleResultClick} className="cursor-pointer">
+            See all result for &quot;{values}&quot;
+          </button>
         </div>
       </div>
     </>

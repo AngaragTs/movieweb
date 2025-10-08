@@ -34,7 +34,9 @@ export const GenrePopUp = () => {
       <div className="w-120 h-0.2 border-1 border-[#E4E4E7] ml-10"></div>
       <div className="w-120 ml-10 flex flex-wrap gap-2  mb-10 ">
         {genredata.map((genres, index) => {
-          return <Genres button={genres.name} key={index} />;
+          return (
+            <Genres button={genres.name} key={index} genreId={genres.id} />
+          );
         })}
       </div>
     </div>

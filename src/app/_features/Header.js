@@ -8,6 +8,7 @@ import { useState } from "react";
 import { PopUpFeauture } from "./PopUpFeature";
 import { SearchPopUp } from "./searchpopup";
 import { useEffect } from "react";
+
 const options = {
   method: "GET",
   headers: {
@@ -68,7 +69,9 @@ export const Header = () => {
         </div>
 
         {openGenre && <GenrePopUp />}
-        {moviedata.length > 1 && <SearchPopUp moviesdatas={moviedata} />}
+        {moviedata.length > 1 && (
+          <SearchPopUp moviesdatas={moviedata} values={values} />
+        )}
       </div>
 
       <button className="cursor-pointer">

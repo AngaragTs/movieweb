@@ -11,7 +11,7 @@ export const Poster = (props) => {
   const router = useRouter();
 
   const HandleMovieClick = () => {
-    router.push(`movie-detail/${movieId}`);
+    router.push(`/movie-detail/${movieId}`);
   };
   return (
     <div>

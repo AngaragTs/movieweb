@@ -126,8 +126,8 @@ export const MovieInfo = ({ id }) => {
   return (
     <>
       {Moviesdata && (
-        <div className="h-200">
-          <div className="w-[1440px] h-140 m-auto">
+        <div className="w-[1440px] m-auto gap-5">
+          <div className="w-full h-140 m-auto">
             <div>
               <div className="flex justify-between">
                 <div>
@@ -146,7 +146,7 @@ export const MovieInfo = ({ id }) => {
                 </div>
               </div>
             </div>
-            <div className="flex gap-10 w-[1440px] justify- items-end">
+            <div className="flex gap-10 justify- items-end">
               <img
                 src={`https://image.tmdb.org/t/p/original/${Moviesdata.poster_path}`}
                 className="w-100 h-[428px]"
@@ -170,13 +170,13 @@ export const MovieInfo = ({ id }) => {
               </div>
             </div>
           </div>
-          <div className="w-full  flex flex-row justify-center gap-5">
+          <div className="w-full h-20 flex flex-row  gap-5">
             {Moviesdata?.genres?.map((genres, index) => {
               return <Genres button={genres.name} key={index} />;
             })}
           </div>
 
-          <div className="h-100 w-[1440px] m-auto mt-10">
+          <div className="h-10  m-auto ">
             <div className="w-120 flex flex-wrap gap-2 "></div>
 
             <p>{Moviesdata.overview}</p>
@@ -184,7 +184,7 @@ export const MovieInfo = ({ id }) => {
         </div>
       )}
       {Moviesdatas && (
-        <div className="w-360 h-70 m-auto ">
+        <div className="w-360 h-30 m-auto ">
           <div className=" h-7 w-280 flex gap-10">
             <p className="font-bold">Director</p>
             {MovieStardata.crew?.slice(5, 7).map((item, index) => {
@@ -209,16 +209,20 @@ export const MovieInfo = ({ id }) => {
           <div className="w-full h-0.2 border-1 border-[#E4E4E7]"></div>
         </div>
       )}
-      <div className="w-[1440px] h-100 m-auto flex flex-col mb-10">
-        <div className="w-[1440px] flex justify-around">
-          <p className="text-2xl font-semibold">More like this</p>
-          <Link href={`/morelike/?id=${id}`}>
-            <button className="font-medium text-sm cursor-pointer">
-              See more
-            </button>
-          </Link>
+      <div className="w-[1440px] h-100 flex flex-col m-auto mb-10">
+        <div className="w-full flex ">
+          <div className="w-[50%]">
+            <p className="text-2xl font-semibold">More like this</p>
+          </div>
+          <div className="w-[50%] flex justify-end">
+            <Link href={`/morelike/?id=${id}`}>
+              <button className="font-medium text-sm cursor-pointer">
+                See more
+              </button>
+            </Link>
+          </div>
         </div>
-        <div className="w-full flex justify-evenly items-center gap-18">
+        <div className="w-full flex gap-18">
           {MoreMovies?.slice(0, 5).map((movie, index) => {
             return (
               <Poster

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Genres } from "@/app/_componants/genres";
 import { Poster } from "@/app/_componants/poster";
 import { GenrePopUp } from "@/app/_features/GenrePopUp";
+import { MovieGenres } from "@/app/_features/moviegenres";
 const options = {
   method: "GET",
   headers: {
@@ -26,42 +27,28 @@ export const GenreMovies = ({ id }) => {
     setSearchMovie(jsonData.results);
   };
 
-  //   const getDatas = async () => {
-  //     const data = await fetch(
-  //       `https://api.themoviedb.org/3/genre/movie/list?language=en`,
-  //       options
-  //     );
-  //     const jsonData = await data.json();
-  //     setGenreData(jsonData.genres);
-  //   };
-  //   console.log("asdsadasd", genredata);
-  //   useEffect(() => {
-  //     getDatas();
-  //   }, []);
-
   useEffect(() => {
     getData();
   }, []);
 
   return (
     <div className="w-[1440px]   m-auto flex gap-6">
-      <div className="w-[450px] h-full">
+      <div className="w-[300px] ">
         <div>
           <p className="font-semibold text-xl">Search by genre</p>
           <p className="font-normal text-base">See lists of movies by genre</p>
-          <div className="w-120 flex flex-wrap gap-2">
-            <GenrePopUp />
-            {/* {genredata.map((genres, index) => {
-              return <Genres button={genres.name} key={index} genreId={id} />;
-            })} */}
+          <div className="w-full flex flex-wrap gap-2">
+            <MovieGenres />
           </div>
         </div>
       </div>
 
-      <div className="w-1 flex justify-center border-1 border-[#E4E4E7]"></div>
+      <div className="flex justify-center border-1 border-[#E4E4E7]"></div>
       <div className="w-full h-full flex flex-col">
         <div className="w-full h-10 ">
-          <p className="text-3xl font-semibold">Search result</p>
+          <p className="text-3xl font-semibold">
+            {searchMovie.length} titles in &quot;{id}&quot;
+          </p>
         </div>
 
         <div className="flex-wrap w-full h-full justify-around flex gap-3 mb-10">

@@ -1,7 +1,9 @@
 "use client";
 import { Genres } from "@/app/_componants/genres";
 import { Poster } from "@/app/_componants/poster";
+import { MovieGenres } from "@/app/_features/moviegenres";
 import { useEffect, useState } from "react";
+import { NoResult } from "./noresult";
 const options = {
   method: "GET",
   headers: {
@@ -13,7 +15,6 @@ const options = {
 
 export const SearchAllResult = ({ value }) => {
   const [searchMovie, setSearchMovie] = useState([]);
-  const [genredata, setGenreData] = useState([]);
 
   const getData = async () => {
     const data = await fetch(
@@ -25,19 +26,6 @@ export const SearchAllResult = ({ value }) => {
     setSearchMovie(jsonData.results);
   };
 
-  const getDatas = async () => {
-    const data = await fetch(
-      `https://api.themoviedb.org/3/genre/movie/list?language=en`,
-      options
-    );
-    const jsonData = await data.json();
-    setGenreData(jsonData.genres);
-  };
-  console.log("asdsadasd", genredata);
-  useEffect(() => {
-    getDatas();
-  }, []);
-
   useEffect(() => {
     getData();
   }, []);
@@ -47,8 +35,12 @@ export const SearchAllResult = ({ value }) => {
         <div className="w-full h-10 ">
           <p className="text-3xl font-semibold">Search result</p>
         </div>
-        <p className="font-semibold text-xl">Result for &quot;{value}&quot;</p>
-
+        <p className="font-semibold text-xl">
+          {searchMovie.length} Result for &quot;{value}&quot;
+        </p>
+        <div>
+          <NoResult />
+        </div>
         <div className="flex-wrap w-full h-full justify-around flex gap-3 mb-10">
           {searchMovie.map((movie, index) => {
             return (
@@ -63,15 +55,13 @@ export const SearchAllResult = ({ value }) => {
           })}
         </div>
       </div>
-      <div className="w-1 flex justify-center border-1 border-[#E4E4E7]"></div>
+      <div className=" flex justify-center border-1 border-[#E4E4E7]"></div>
       <div className="w-[300px] h-full">
         <div>
           <p className="font-semibold text-xl">Search by genre</p>
           <p className="font-normal text-base">See lists of movies by genre</p>
           <div className="w-120 flex flex-wrap gap-2">
-            {genredata.map((genres, index) => {
-              return <Genres button={genres.name} key={index} />;
-            })}
+            <MovieGenres />
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ import { Starticon } from "../icons/Staricon";
 import { HeroLoader } from "../_componants/heroloader";
 
 const apiLink =
-  "https://api.themoviedb.org/3//movie/now_playing?language=en-US&page=1";
+  "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
 const options = {
   method: "GET",
   headers: {

@@ -176,7 +176,7 @@ export const MovieInfo = ({ id }) => {
             })}
           </div>
 
-          <div className="h-10  m-auto ">
+          <div className="  m-auto ">
             <div className="w-120 flex flex-wrap gap-2 "></div>
 
             <p>{Moviesdata.overview}</p>
@@ -184,7 +184,7 @@ export const MovieInfo = ({ id }) => {
         </div>
       )}
       {Moviesdatas && (
-        <div className="w-360 h-30 m-auto ">
+        <div className="w-360 mt-10 m-auto ">
           <div className=" h-7 w-280 flex gap-10">
             <p className="font-bold">Director</p>
             {MovieStardata.crew?.slice(5, 7).map((item, index) => {
@@ -209,7 +209,7 @@ export const MovieInfo = ({ id }) => {
           <div className="w-full h-0.2 border-1 border-[#E4E4E7]"></div>
         </div>
       )}
-      <div className="w-[1440px] h-100 flex flex-col m-auto mb-10">
+      <div className="w-[1440px] h-100 flex flex-col m-auto mb-10 mt-10">
         <div className="w-full flex ">
           <div className="w-[50%]">
             <p className="text-2xl font-semibold">More like this</p>
@@ -222,7 +222,7 @@ export const MovieInfo = ({ id }) => {
             </Link>
           </div>
         </div>
-        <div className="w-full flex gap-18">
+        <div className="w-full flex gap-18 mt-10 mb-10">
           {MoreMovies?.slice(0, 5).map((movie, index) => {
             return (
               <Poster

@@ -3,6 +3,7 @@ import { Poster } from "../_componants/poster";
 import { useState, useEffect } from "react";
 import { Header } from "../_features/Header";
 import { Footer } from "../_features/Footer";
+import { Loader } from "./_feature/loader";
 const apiLink =
   "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
 const options = {
@@ -23,7 +24,10 @@ export default function Home() {
     const data = await fetch(apiLink, options);
     const jsonData = await data.json();
     setUpComingMoviesData(jsonData.results);
-    setLoading(false);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 4000);
   };
 
   useEffect(() => {
@@ -31,7 +35,11 @@ export default function Home() {
   }, []);
 
   if (Loading) {
-    return <div>...Loading</div>;
+    return (
+      <div className="w-[1440px] h-210  flex  flex-wrap justify-around gap-5">
+        <Loader />
+      </div>
+    );
   }
   return (
     <div className="w-full h-210 mt-10 justify-center">

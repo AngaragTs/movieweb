@@ -38,13 +38,13 @@ export const UpComingMovieList = (props) => {
 
   if (Loading) {
     return (
-      <div className="w-[1440px] h-210  flex  flex-wrap justify-around gap-5">
+      <div className="sm:w-[1440px] h-210  flex  flex-wrap justify-around gap-5">
         <Loader />
       </div>
     );
   }
   return (
-    <div className="w-full h-210 mt-10 justify-center ">
+    <div className="sm:w-full h-210 mt-10 justify-center ">
       <div className="w-full h-9 flex-row flex justify-evenly  ">
         <p className="w-320 font-semibold">{heading}</p>
         <Link href={"/UpComing"}>

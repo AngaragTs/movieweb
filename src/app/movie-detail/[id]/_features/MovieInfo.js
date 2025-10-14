@@ -77,7 +77,7 @@ export const MovieInfo = ({ id }) => {
 
     setTimeout(() => {
       setLoading(false);
-    }, 100);
+    }, 4000);
   };
 
   // const MovieTrailer = async () => {
@@ -132,16 +132,22 @@ export const MovieInfo = ({ id }) => {
               <div className="flex justify-between">
                 <div>
                   <p className="font-bold text-4xl">{Moviesdata.title}</p>
-                  <p>{Moviesdata.release_date}</p>
+                  <div className="flex gap-2">
+                    <p>{Moviesdata.release_date}</p>
+                    <div className="flex">
+                      <p>{Math.floor(Moviesdata.runtime / 60)}h</p>
+                      <p>{Math.ceil(Moviesdata.runtime % 60)}min</p>
+                    </div>
+                  </div>
                 </div>
                 <div>
                   <p className="font-medium text-xs">Rating</p>
                   <div className="flex">
                     <Starticon />
-                    <p className="flex">{Moviesdata.vote_average}</p>
+                    <p className="flex">{Moviesdata.vote_average}/10</p>
                   </div>
                   <div>
-                    <p className="text-[#71717A]">{Moviesdata.popularity}</p>
+                    <p className="text-[#71717A]">{Moviesdata.popularity}K</p>
                   </div>
                 </div>
               </div>
